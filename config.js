@@ -9,6 +9,6 @@ export const LOJA = {
 };
 // Supabase > Project Settings > API. Use a chave "anon" (public). Nunca a "service_role".
 export const supabaseConfig = {
-  url: "COLE_AQUI",      // ex.: https://abcdxyz.supabase.co
-  anonKey: "COLE_AQUI"
+  url:"https://xanxucukyknrvzziggkz.supabase.co",  
+  anonKey: "sb_publishable_2IBNiS9c24REai_DJC1wyw_RtHURzg_"
 };
