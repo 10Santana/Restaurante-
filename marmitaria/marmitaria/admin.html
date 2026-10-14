@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Painel da loja</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body class="admin">
+<header class="topo"><div class="wrap barra-admin"><strong>Painel da loja</strong><span id="email"></span><button class="btn-sec" id="sair" hidden>Sair</button></div></header>
+<main class="wrap">
+  <p class="aviso" id="aviso" hidden>Preencha o supabaseConfig em config.js para ativar o painel.</p>
+
+  <section class="cartao" id="login" hidden>
+    <h2>Entrar</h2>
+    <label>E-mail <input id="l-email" type="email" autocomplete="username"></label>
+    <label>Senha <input id="l-senha" type="password" autocomplete="current-password"></label>
+    <p class="erro" id="l-erro" role="alert"></p>
+    <button class="btn" id="entrar">Entrar</button>
+  </section>
+
+  <section class="painel-grid" id="painel" hidden>
+    <div class="cartao">
+      <h2 id="titulo-form">Novo produto</h2>
+      <input type="hidden" id="p-id">
+      <label>Nome <input id="p-nome"></label>
+      <label>Categoria <input id="p-cat" list="cats" placeholder="Marmitas, Bebidas, Extras"></label>
+      <datalist id="cats"><option value="Marmitas"><option value="Bebidas"><option value="Extras"></datalist>
+      <label>Descrição <textarea id="p-desc" rows="2"></textarea></label>
+      <label>Preços (use ; entre opções)
+        <input id="p-precos" placeholder="Pequena=16; Média=20,50; Grande=25"></label>
+      <label>Link da foto (opcional) <input id="p-img" type="url" placeholder="https://..."></label>
+      <label>Emoji se não tiver foto <input id="p-emoji" maxlength="4" placeholder="🍛"></label>
+      <label>Situação
+        <select id="p-status"><option value="ativo">À venda</option><option value="esgotado">Esgotado</option><option value="oculto">Oculto</option></select></label>
+      <p class="erro" id="p-erro" role="alert"></p>
+      <button class="btn" id="salvar">Salvar produto</button>
+      <button class="btn-sec" id="limpar">Limpar formulário</button>
+    </div>
+    <div class="tabela"><table>
+      <thead><tr><th>Produto</th><th>Preços</th><th>Situação</th><th></th></tr></thead>
+      <tbody id="lista"></tbody></table></div>
+  </section>
+</main>
+<script type="module" src="admin.js"></script>
+</body>
+</html>
