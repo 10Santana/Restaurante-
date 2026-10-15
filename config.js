@@ -1,14 +1,17 @@
-// Dados da loja e do Supabase. Edite só este arquivo.
-export const LOJA = {
-  nome: "Marmitaria da Casa",
-  slogan: "Comida caseira feita hoje, na cozinha ao lado.",
-  whatsapp: "5511999999999",          // DDI + DDD + número
-  taxaEntrega: 5,
-  horario: "Seg a sáb, 11h às 15h",
-  endereco: "Rua Exemplo, 123"
+const CONFIG = {
+  // Configurações do Supabase
+  supabaseUrl: 'https://xanxucukyknrvzziggkz.supabase.co',
+  supabaseKey: 'https://sb_publishable_2IBNiS9c24REai_DJC1wyw_RtHURzg_',
+
+  // Identificação e Contactos do Restaurante
+  nomeRestaurante: 'Dom 10 Marmitaria',
+  whatsapp: '5511969429812', // Número principal (apenas dígitos)
+  whatsappFormatado: '(11) 96942-9812',
+  whatsappSecundario: '(11) 99419-6063',
+
+  // Configurações de Pedido
+  taxaEntregaPadrao: 5.00,
+  tempoEntregaEstimado: '30-50 min'
 };
-// Supabase > Project Settings > API. Use a chave "anon" (public). Nunca a "service_role".
-export const supabaseConfig = {
-  url:"https://xanxucukyknrvzziggkz.supabase.co",  
-  anonKey: "sb_publishable_2IBNiS9c24REai_DJC1wyw_RtHURzg_"
-};
+
+export default CONFIG;

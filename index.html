@@ -1,41 +1,50 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cardápio</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="estilo.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dom 10 Marmitaria - Cardápio Online</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilo.css">
 </head>
-<body>
-<header class="hero"><div class="wrap">
-  <h1 id="nome-loja"></h1><p id="slogan"></p>
-  <div class="infos" id="infos"></div>
-</div></header>
-<nav aria-label="Categorias"><div class="wrap" id="categorias"></div></nav>
-<main class="wrap"><div class="grade" id="grade"></div></main>
-<footer><div class="wrap" id="rodape"></div></footer>
+<body class="cliente">
+  
+  <!-- Cabeçalho com Fachada e Marca -->
+  <header class="topo">
+    <div class="wrap" style="text-align: center; padding: 15px 0;">
+      <h1 style="margin-bottom: 10px; font-size: 1.8rem; color: #2e7d32;">🍱 Dom 10 Marmitaria</h1>
+      <div style="margin: 0 auto; max-width: 600px;">
+        <img src="fachada.jpg" alt="Fachada Dom 10 Marmitaria" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+      </div>
+      <p style="margin-top: 12px; font-weight: 600; color: #333;">
+        📱 Faça seu pedido via WhatsApp:<br>
+        <a href="https://wa.me/5511969429812" target="_blank" style="color: #2e7d32; text-decoration: none;">(11) 96942-9812</a> | 
+        <a href="https://wa.me/5511994196063" target="_blank" style="color: #2e7d32; text-decoration: none;">(11) 99419-6063</a>
+      </p>
+    </div>
+  </header>
 
-<div id="barra"><button id="abrir" disabled><span id="qtd-total"></span><span id="valor-total"></span></button></div>
-<div id="gaveta" aria-hidden="true">
-  <aside id="painel-pedido" role="dialog" aria-label="Seu pedido">
-    <button class="fechar" id="fechar" aria-label="Fechar">×</button>
-    <h2>Seu pedido</h2>
-    <div id="itens"></div>
-    <div class="total"><span>Total</span><span id="total"></span></div>
-    <label>Seu nome <input id="f-nome" autocomplete="name"></label>
-    <label>Como vai receber?
-      <select id="f-tipo"><option value="entrega">Entrega</option><option value="retirada">Retirar na loja</option></select></label>
-    <label id="l-endereco">Endereço de entrega <input id="f-endereco" autocomplete="street-address"></label>
-    <label>Pagamento
-      <select id="f-pagto"><option>Pix</option><option>Cartão na entrega</option><option>Dinheiro</option></select></label>
-    <label>Observações <textarea id="f-obs" rows="2" placeholder="Ex.: sem cebola"></textarea></label>
-    <p class="erro" id="erro" role="alert"></p>
-    <button class="enviar" id="enviar">Enviar pedido pelo WhatsApp</button>
-  </aside>
-</div>
-<script type="module" src="app.js"></script>
+  <!-- Conteúdo Principal / Cardápio -->
+  <main class="wrap" style="margin-top: 20px;">
+    <section class="cardapio">
+      <h2 style="margin-bottom: 15px;">Nosso Cardápio</h2>
+      <div id="categorias-container"></div>
+      <div id="produtos-container" class="produtos-grid"></div>
+    </section>
+
+    <!-- Carrinho / Resumo do Pedido -->
+    <aside class="carrinho-painel" id="carrinho" hidden>
+      <h3>Seu Pedido</h3>
+      <div id="itens-carrinho"></div>
+      <div class="resumo-carrinho">
+        <p>Total: <strong id="total-carrinho">R$ 0,00</strong></p>
+        <button class="btn" id="btn-finalizar">Finalizar Pedido no WhatsApp</button>
+      </div>
+    </aside>
+  </main>
+
+  <script type="module" src="app.js"></script>
 </body>
 </html>
