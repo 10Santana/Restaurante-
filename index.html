@@ -9,9 +9,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="estilo.css">
   <style>
-    /* RESET E VARIÁVEIS DO DESIGN INSPIRADO */
     :root {
-      --cor-destaque: #e53935; /* Vermelho/Laranja da referência */
+      --cor-destaque: #e53935;
       --cor-destaque-hover: #c62828;
       --cor-fundo: #faf8f5;
       --cor-card: #ffffff;
@@ -30,6 +29,7 @@
       font-family: 'Figtree', sans-serif;
       color: var(--cor-texto);
       line-height: 1.5;
+      padding-bottom: 80px;
     }
 
     /* BARRA SUPERIOR DE CONTATO */
@@ -48,7 +48,7 @@
       margin: 0 5px;
     }
 
-    /* HERO BANNER ESTILO PARALLAX / DESIGN */
+    /* HERO BANNER */
     .hero-container {
       max-width: 1100px;
       margin: 30px auto 20px;
@@ -149,6 +149,45 @@
       background-color: var(--cor-destaque);
       border-radius: 4px;
     }
+
+    /* BOTÃO FLUTUANTE DO WHATSAPP (CANTO INFERIOR DIREITO) */
+    .btn-whatsapp-flutuante {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25d366;
+      color: white;
+      border-radius: 50px;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+      z-index: 999;
+      transition: transform 0.2s ease;
+    }
+
+    .btn-whatsapp-flutuante:hover {
+      transform: scale(1.05);
+      background-color: #20ba5a;
+    }
+
+    /* CARRINHO FLUTUANTE (CANTO INFERIOR ESQUERDO / CENTRALIZADO) */
+    .carrinho-painel {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      max-width: 360px;
+      width: calc(100% - 100px);
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 15px 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+      border: 2px solid #e53935;
+      z-index: 998;
+    }
   </style>
 </head>
 <body class="cliente">
@@ -160,7 +199,7 @@
     <a href="https://wa.me/5511994196063" target="_blank">(11) 99419-6063</a>
   </div>
 
-  <!-- Hero Section baseada no design de referência -->
+  <!-- Hero Section -->
   <header class="hero-container">
     <div class="hero-card">
       <div class="hero-texto">
@@ -183,14 +222,19 @@
 
     <!-- Carrinho Flutuante / Resumo do Pedido -->
     <aside class="carrinho-painel" id="carrinho" hidden>
-      <h3>Seu Pedido</h3>
+      <h3 style="margin-bottom: 8px;">🛒 Seu Pedido</h3>
       <div id="itens-carrinho"></div>
-      <div class="resumo-carrinho">
+      <div class="resumo-carrinho" style="margin-top: 10px;">
         <p>Total: <strong id="total-carrinho">R$ 0,00</strong></p>
-        <button class="btn" id="btn-finalizar">Finalizar Pedido no WhatsApp</button>
+        <button class="btn" id="btn-finalizar" style="width: 100%; margin-top: 8px; background: #25d366; color: #fff; border: none; padding: 10px; border-radius: 8px; font-weight: bold; cursor: pointer;">Finalizar Pedido no WhatsApp</button>
       </div>
     </aside>
   </main>
+
+  <!-- Botão Flutuante do WhatsApp no canto -->
+  <a href="https://wa.me/5511969429812" class="btn-whatsapp-flutuante" target="_blank">
+    <span>💬 WhatsApp</span>
+  </a>
 
   <script type="module" src="app.js"></script>
 </body>
