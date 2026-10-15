@@ -9,154 +9,179 @@
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="estilo.css">
   <style>
-    /* Estilos personalizados com a estética refinada inspirada no Pinterest */
+    /* RESET E VARIÁVEIS DO DESIGN INSPIRADO */
     :root {
-      --cor-principal: #2e7d32;
-      --cor-fundo: #fcfbf9;
-      --cor-cartao: #ffffff;
-      --cor-texto: #2c2c2c;
+      --cor-destaque: #e53935; /* Vermelho/Laranja da referência */
+      --cor-destaque-hover: #c62828;
+      --cor-fundo: #faf8f5;
+      --cor-card: #ffffff;
+      --cor-texto: #1a1a1a;
+      --cor-suave: #666666;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body.cliente {
       background-color: var(--cor-fundo);
       font-family: 'Figtree', sans-serif;
       color: var(--cor-texto);
-      margin: 0;
-      padding: 0;
+      line-height: 1.5;
     }
 
-    .topo-estetico {
-      background: linear-gradient(to bottom, #ffffff, #f7f5f0);
-      padding: 30px 20px;
+    /* BARRA SUPERIOR DE CONTATO */
+    .topo-contato {
+      background: #111;
+      color: #fff;
       text-align: center;
-      border-bottom: 1px solid #eae5df;
-    }
-
-    .topo-estetico h1 {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 2.2rem;
-      color: var(--cor-principal);
-      margin-bottom: 8px;
-    }
-
-    .topo-estetico p {
-      font-size: 1.05rem;
-      color: #555;
+      padding: 8px 15px;
+      font-size: 0.9rem;
       font-weight: 600;
     }
 
-    .topo-estetico a {
-      color: var(--cor-principal);
+    .topo-contato a {
+      color: #4caf50;
       text-decoration: none;
+      margin: 0 5px;
     }
 
-    .topo-estetico a:hover {
-      text-decoration: underline;
+    /* HERO BANNER ESTILO PARALLAX / DESIGN */
+    .hero-container {
+      max-width: 1100px;
+      margin: 30px auto 20px;
+      padding: 0 20px;
     }
 
-    /* Grelha de Destaques / Estilo Pinterest */
-    .pinterest-grid-section {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      max-width: 900px;
-      margin: 30px auto;
-      padding: 0 15px;
-      align-items: center;
-      justify-items: center;
-    }
-
-    .card-pinterest-estilo {
-      background: var(--cor-cartao);
-      border-radius: 16px;
+    .hero-card {
+      background: var(--cor-card);
+      border-radius: 24px;
       overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-      transition: transform 0.3s ease;
-      width: 100%;
-      max-width: 360px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      align-items: center;
     }
 
-    .card-pinterest-estilo:hover {
-      transform: translateY(-4px);
+    @media (max-width: 768px) {
+      .hero-card {
+        grid-template-columns: 1fr;
+      }
     }
 
-    .card-pinterest-estilo img {
+    .hero-texto {
+      padding: 50px 40px;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      color: var(--cor-destaque);
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .hero-titulo {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 2.8rem;
+      line-height: 1.1;
+      color: #111;
+      margin-bottom: 15px;
+    }
+
+    .hero-subtitulo {
+      font-size: 1.1rem;
+      color: var(--cor-suave);
+      margin-bottom: 30px;
+    }
+
+    .btn-hero {
+      display: inline-block;
+      background-color: var(--cor-destaque);
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(229, 57, 53, 0.3);
+    }
+
+    .btn-hero:hover {
+      background-color: var(--cor-destaque-hover);
+      transform: translateY(-2px);
+    }
+
+    .hero-imagem {
       width: 100%;
-      height: auto;
+      height: 100%;
+      min-height: 380px;
+      object-fit: cover;
       display: block;
     }
 
-    .card-conteudo {
-      padding: 20px;
-      text-align: center;
+    /* CARDÁPIO SEÇÃO */
+    .wrap-cardapio {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
     }
 
-    .card-conteudo h3 {
+    .titulo-secao {
       font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 1.3rem;
-      margin-bottom: 8px;
-      color: #333;
+      font-size: 2rem;
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
-    .card-conteudo p {
-      color: #666;
-      font-size: 0.95rem;
-    }
-
-    /* Ajustes gerais de layout para o cardápio */
-    .wrap {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    .cardapio h2 {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 1.8rem;
-      color: #222;
-      margin-bottom: 20px;
-      border-left: 4px solid var(--cor-principal);
-      padding-left: 10px;
+    .titulo-secao::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 32px;
+      background-color: var(--cor-destaque);
+      border-radius: 4px;
     }
   </style>
 </head>
 <body class="cliente">
-  
-  <!-- Cabeçalho Estilizado -->
-  <header class="topo-estetico">
-    <h1>🍱 Dom 10 Marmitaria</h1>
-    <p>📱 Faça o seu pedido diretamente via WhatsApp:<br>
-      <a href="https://wa.me/5511969429812" target="_blank">(11) 96942-9812</a> | 
-      <a href="https://wa.me/5511994196063" target="_blank">(11) 99419-6063</a>
-    </p>
-  </header>
 
-  <!-- Secção de Destaques Visuais (Estilo Pinterest / Cartões Orgânicos) -->
-  <div class="pinterest-grid-section">
-    <!-- Cartão com a Fachada da Marmitaria -->
-    <div class="card-pinterest-estilo">
-      <img src="fachada.jpg" alt="Fachada Dom 10 Marmitaria">
-      <div class="card-conteudo">
-        <h3>Nossa Cozinha</h3>
-        <p>Ambiente preparado com dedicação e higiene para servir a melhor marmita da região.</p>
-      </div>
-    </div>
-
-    <!-- Incorporação do Pin do Pinterest -->
-    <div class="card-pinterest-estilo" style="display: flex; justify-content: center; background: transparent; box-shadow: none;">
-      <iframe src="https://assets.pinterest.com/ext/embed.html?id=3448137209030297" height="359" width="345" frameborder="0" scrolling="no" style="border-radius: 16px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);"></iframe>
-    </div>
+  <!-- Faixa de Contato no Topo -->
+  <div class="topo-contato">
+    <span>🍱 Dom 10 Marmitaria — Faça seu pedido:</span>
+    <a href="https://wa.me/5511969429812" target="_blank">(11) 96942-9812</a> | 
+    <a href="https://wa.me/5511994196063" target="_blank">(11) 99419-6063</a>
   </div>
 
-  <!-- Conteúdo Principal / Cardápio Dinâmico -->
-  <main class="wrap">
-    <section class="cardapio">
-      <h2>Cardápio do Dia</h2>
-      <div id="categorias-container"></div>
-      <div id="produtos-container" class="produtos-grid"></div>
-    </section>
+  <!-- Hero Section baseada no design de referência -->
+  <header class="hero-container">
+    <div class="hero-card">
+      <div class="hero-texto">
+        <span class="hero-tag">Dom 10 Marmitaria</span>
+        <h1 class="hero-titulo">Sabor caseiro feito para você.</h1>
+        <p class="hero-subtitulo">Comida de verdade, ingredientes selecionados e entrega rápida todos os dias.</p>
+        <a href="#cardapio" class="btn-hero">Ver Cardápio</a>
+      </div>
+      <div>
+        <img src="fachada.jpg" alt="Dom 10 Marmitaria Fachada" class="hero-imagem" onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80'">
+      </div>
+    </div>
+  </header>
 
-    <!-- Carrinho / Resumo do Pedido -->
+  <!-- Seção do Cardápio -->
+  <main class="wrap-cardapio" id="cardapio">
+    <h2 class="titulo-secao">Cardápio do Dia</h2>
+    <div id="categorias-container"></div>
+    <div id="produtos-container" class="produtos-grid"></div>
+
+    <!-- Carrinho Flutuante / Resumo do Pedido -->
     <aside class="carrinho-painel" id="carrinho" hidden>
       <h3>Seu Pedido</h3>
       <div id="itens-carrinho"></div>
