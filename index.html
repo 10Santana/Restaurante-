@@ -29,29 +29,89 @@
       font-family: 'Figtree', sans-serif;
       color: var(--cor-texto);
       line-height: 1.5;
-      padding-bottom: 80px;
+      padding-bottom: 90px;
     }
 
-    /* BARRA SUPERIOR DE CONTATO */
-    .topo-contato {
+    /* CABEÇALHO NOVO E MODERNO */
+    .header-principal {
+      background: #ffffff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .topo-info-bar {
       background: #111;
       color: #fff;
       text-align: center;
-      padding: 8px 15px;
-      font-size: 0.9rem;
+      padding: 6px 15px;
+      font-size: 0.85rem;
       font-weight: 600;
     }
 
-    .topo-contato a {
-      color: #4caf50;
+    .topo-info-bar a {
+      color: #25d366;
       text-decoration: none;
-      margin: 0 5px;
+      margin: 0 6px;
     }
 
-    /* HERO BANNER */
+    .nav-bar {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo-emoji {
+      font-size: 1.8rem;
+      background: #fff0f0;
+      padding: 6px 10px;
+      border-radius: 12px;
+    }
+
+    .logo-texto {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #111;
+    }
+
+    .logo-texto span {
+      color: var(--cor-destaque);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: #444;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover {
+      color: var(--cor-destaque);
+    }
+
+    /* HERO BANNER PRINCIPAL */
     .hero-container {
       max-width: 1100px;
-      margin: 30px auto 20px;
+      margin: 25px auto 15px;
       padding: 0 20px;
     }
 
@@ -61,7 +121,7 @@
       overflow: hidden;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.05);
       align-items: center;
     }
 
@@ -69,47 +129,50 @@
       .hero-card {
         grid-template-columns: 1fr;
       }
+      .nav-links {
+        display: none;
+      }
     }
 
     .hero-texto {
-      padding: 50px 40px;
+      padding: 40px;
     }
 
     .hero-tag {
       display: inline-block;
       text-transform: uppercase;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       letter-spacing: 2px;
       color: var(--cor-destaque);
       font-weight: 700;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
     }
 
     .hero-titulo {
       font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 2.8rem;
+      font-size: 2.5rem;
       line-height: 1.1;
       color: #111;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
     }
 
     .hero-subtitulo {
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: var(--cor-suave);
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
 
     .btn-hero {
       display: inline-block;
       background-color: var(--cor-destaque);
       color: #fff;
-      padding: 14px 28px;
+      padding: 12px 26px;
       border-radius: 50px;
       text-decoration: none;
       font-weight: 700;
-      font-size: 1rem;
+      font-size: 0.95rem;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(229, 57, 53, 0.3);
+      box-shadow: 0 4px 15px rgba(229, 57, 53, 0.25);
     }
 
     .btn-hero:hover {
@@ -120,37 +183,133 @@
     .hero-imagem {
       width: 100%;
       height: 100%;
-      min-height: 380px;
+      min-height: 320px;
       object-fit: cover;
       display: block;
     }
 
-    /* CARDÁPIO SEÇÃO */
+    /* CARROSSEL DE VITRINES COM TRANSIÇÃO SUAVE */
+    .secao-vitrine {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .vitrine-container {
+      position: relative;
+      background: linear-gradient(135deg, #2c3e50, #1a252f);
+      border-radius: 20px;
+      overflow: hidden;
+      color: #fff;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+      min-height: 220px;
+      display: flex;
+      align-items: center;
+    }
+
+    .vitrine-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 30px 40px;
+      pointer-events: none;
+    }
+
+    .vitrine-slide.ativo {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .vitrine-conteudo h3 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 1.8rem;
+      color: #ffeb3b;
+      margin-bottom: 8px;
+    }
+
+    .vitrine-conteudo p {
+      font-size: 1.05rem;
+      color: #e0e0e0;
+      margin-bottom: 15px;
+    }
+
+    .vitrine-badge {
+      display: inline-block;
+      background: var(--cor-destaque);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .vitrine-imagem {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+      border: 4px solid rgba(255,255,255,0.2);
+    }
+
+    /* PONTOS DE NAVEGAÇÃO DA VITRINE */
+    .vitrine-dots {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .dot.ativo {
+      background: #ffeb3b;
+      transform: scale(1.3);
+    }
+
+    /* SEÇÃO CARDÁPIO DO DIA */
     .wrap-cardapio {
       max-width: 1100px;
-      margin: 40px auto;
+      margin: 30px auto;
       padding: 0 20px;
     }
 
     .titulo-secao {
       font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 2rem;
-      margin-bottom: 25px;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .titulo-secao::before {
       content: '';
       display: inline-block;
-      width: 6px;
-      height: 32px;
+      width: 5px;
+      height: 28px;
       background-color: var(--cor-destaque);
       border-radius: 4px;
     }
 
-    /* BOTÃO FLUTUANTE DO WHATSAPP (CANTO INFERIOR DIREITO) */
+    /* BOTÃO FLUTUANTE DE WHATSAPP */
     .btn-whatsapp-flutuante {
       position: fixed;
       bottom: 20px;
@@ -161,7 +320,7 @@
       padding: 12px 20px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       font-weight: 700;
       text-decoration: none;
       box-shadow: 0 4px 20px rgba(0,0,0,0.25);
@@ -171,71 +330,145 @@
 
     .btn-whatsapp-flutuante:hover {
       transform: scale(1.05);
-      background-color: #20ba5a;
     }
 
-    /* CARRINHO FLUTUANTE (CANTO INFERIOR ESQUERDO / CENTRALIZADO) */
+    /* CARRINHO FLUTUANTE */
     .carrinho-painel {
       position: fixed;
       bottom: 20px;
       left: 20px;
       max-width: 360px;
-      width: calc(100% - 100px);
+      width: calc(100% - 110px);
       background: #ffffff;
       border-radius: 16px;
-      padding: 15px 20px;
+      padding: 15px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.18);
-      border: 2px solid #e53935;
+      border: 2px solid var(--cor-destaque);
       z-index: 998;
     }
   </style>
 </head>
 <body class="cliente">
 
-  <!-- Faixa de Contato no Topo -->
-  <div class="topo-contato">
-    <span>🍱 Dom 10 Marmitaria — Faça seu pedido:</span>
-    <a href="https://wa.me/5511969429812" target="_blank">(11) 96942-9812</a> | 
-    <a href="https://wa.me/5511994196063" target="_blank">(11) 99419-6063</a>
-  </div>
-
-  <!-- Hero Section -->
-  <header class="hero-container">
-    <div class="hero-card">
-      <div class="hero-texto">
-        <span class="hero-tag">Dom 10 Marmitaria</span>
-        <h1 class="hero-titulo">Sabor caseiro feito para você.</h1>
-        <p class="hero-subtitulo">Comida de verdade, ingredientes selecionados e entrega rápida todos os dias.</p>
-        <a href="#cardapio" class="btn-hero">Ver Cardápio</a>
-      </div>
-      <div>
-        <img src="fachada.jpg" alt="Dom 10 Marmitaria Fachada" class="hero-imagem" onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80'">
-      </div>
+  <!-- Cabeçalho Principal Reformulado -->
+  <header class="header-principal">
+    <div class="topo-info-bar">
+      <span>🍱 Dom 10 Marmitaria — Peça pelo WhatsApp:</span>
+      <a href="https://wa.me/5511969429812" target="_blank">(11) 96942-9812</a> | 
+      <a href="https://wa.me/5511994196063" target="_blank">(11) 99419-6063</a>
     </div>
+    <nav class="nav-bar">
+      <a href="#" class="logo-container">
+        <span class="logo-emoji">🍱</span>
+        <div class="logo-texto">Dom 10 <span>Marmitaria</span></div>
+      </a>
+      <div class="nav-links">
+        <a href="#vitrine" class="nav-link">Destaques</a>
+        <a href="#cardapio" class="nav-link">Cardápio</a>
+        <a href="https://wa.me/5511969429812" target="_blank" class="nav-link" style="color: #25d366;">WhatsApp</a>
+      </div>
+    </nav>
   </header>
 
-  <!-- Seção do Cardápio -->
+  <!-- Hero Banner -->
+  <section class="hero-container">
+    <div class="hero-card">
+      <div class="hero-texto">
+        <span class="hero-tag">Sabor & Tradição</span>
+        <h1 class="hero-titulo">Comida caseira feita no capricho.</h1>
+        <p class="hero-subtitulo">Marmitas quentinhas, refeições completas e entrega rápida para o seu dia a dia.</p>
+        <a href="#cardapio" class="btn-hero">Fazer Pedido</a>
+      </div>
+      <div>
+        <img src="fachada.jpg" alt="Dom 10 Marmitaria" class="hero-imagem" onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80'">
+      </div>
+    </div>
+  </section>
+
+  <!-- Vitrine Destaques com Transição Suave (Slideshow) -->
+  <section class="secao-vitrine" id="vitrine">
+    <div class="vitrine-container">
+      <div class="vitrine-slide ativo" id="slide-0">
+        <div class="vitrine-conteudo">
+          <span class="vitrine-badge">Destaque do Dia</span>
+          <h3>Marmitas Especiais</h3>
+          <p>Preparadas na hora com tempero caseiro inconfundível.</p>
+        </div>
+        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80" class="vitrine-imagem" alt="Marmita Especial">
+      </div>
+
+      <div class="vitrine-slide" id="slide-1">
+        <div class="vitrine-conteudo">
+          <span class="vitrine-badge">Geladinhas</span>
+          <h3>Bebidas & Acompanhamentos</h3>
+          <p>Sucos, refrigerantes e extras para completar seu almoço.</p>
+        </div>
+        <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=400&q=80" class="vitrine-imagem" alt="Bebidas">
+      </div>
+
+      <div class="vitrine-slide" id="slide-2">
+        <div class="vitrine-conteudo">
+          <span class="vitrine-badge">Entrega Rápida</span>
+          <h3>Direto na sua Porta</h3>
+          <p>Peça pelo WhatsApp e receba quentinho no seu endereço.</p>
+        </div>
+        <img src="https://images.unsplash.com/photo-1526367790999-0150786686a2?auto=format&fit=crop&w=400&q=80" class="vitrine-imagem" alt="Entrega Rápida">
+      </div>
+
+      <div class="vitrine-dots">
+        <span class="dot ativo" onclick="mudarSlide(0)"></span>
+        <span class="dot" onclick="mudarSlide(1)"></span>
+        <span class="dot" onclick="mudarSlide(2)"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cardápio do Dia -->
   <main class="wrap-cardapio" id="cardapio">
     <h2 class="titulo-secao">Cardápio do Dia</h2>
     <div id="categorias-container"></div>
     <div id="produtos-container" class="produtos-grid"></div>
 
-    <!-- Carrinho Flutuante / Resumo do Pedido -->
+    <!-- Carrinho Flutuante -->
     <aside class="carrinho-painel" id="carrinho" hidden>
-      <h3 style="margin-bottom: 8px;">🛒 Seu Pedido</h3>
+      <h3 style="margin-bottom: 6px;">🛒 Seu Pedido</h3>
       <div id="itens-carrinho"></div>
       <div class="resumo-carrinho" style="margin-top: 10px;">
         <p>Total: <strong id="total-carrinho">R$ 0,00</strong></p>
-        <button class="btn" id="btn-finalizar" style="width: 100%; margin-top: 8px; background: #25d366; color: #fff; border: none; padding: 10px; border-radius: 8px; font-weight: bold; cursor: pointer;">Finalizar Pedido no WhatsApp</button>
+        <button class="btn" id="btn-finalizar" style="width: 100%; margin-top: 8px; background: #25d366; color: #fff; border: none; padding: 10px; border-radius: 8px; font-weight: bold; cursor: pointer;">Finalizar no WhatsApp</button>
       </div>
     </aside>
   </main>
 
-  <!-- Botão Flutuante do WhatsApp no canto -->
+  <!-- Botão Flutuante de WhatsApp -->
   <a href="https://wa.me/5511969429812" class="btn-whatsapp-flutuante" target="_blank">
-    <span>💬 WhatsApp</span>
+    <span>💬 Pedir no WhatsApp</span>
   </a>
 
+  <!-- Script da Vitrine e Módulos -->
+  <script>
+    let slideIndex = 0;
+    const slides = document.querySelectorAll('.vitrine-slide');
+    const dots = document.querySelectorAll('.dot');
+
+    function mudarSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.remove('ativo');
+        dots[i].classList.remove('ativo');
+      });
+      slideIndex = index;
+      slides[slideIndex].classList.add('ativo');
+      dots[slideIndex].classList.add('ativo');
+    }
+
+    function autoSlide() {
+      slideIndex = (slideIndex + 1) % slides.length;
+      mudarSlide(slideIndex);
+    }
+
+    // Alterna a vitrine automaticamente a cada 4 segundos
+    setInterval(autoSlide, 4000);
+  </script>
   <script type="module" src="app.js"></script>
 </body>
 </html>
