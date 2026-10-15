@@ -35,9 +35,47 @@ function vitrine(){
   const cs = [...new Set(visiveis().map(p => p.cat))].sort((a,b) => peso(a) - peso(b) || a.localeCompare(b));
   if(!cs.includes(cat)) cat = cs[0];
   $("#categorias").innerHTML = cs.map(c => `<button aria-pressed="${c===cat}" data-cat="${esc(c)}">${esc(c)}</button>`).join("");
-  $("#grade").innerHTML = visiveis().filter(p => p.cat === cat).sort((a,b) => a.nome.localeCompare(b.nome)).map(card).join("")
+  $("#grade").innerHTML = visiveis().filter(p => p.cat === cat).sort(ordenar).map(card).join("")
     || "<p>Nenhum item disponível agora.</p>";
+  const n = visiveis().filter(p => p.cat === cat).length;
+  $("#contagem").textContent = `${n} ${n === 1 ? "item" : "itens"}`;
 }
+
+/* ---- rotação automática das categorias (a vitrine troca sozinha) ---- */
+let ultimoToque = 0, sobre = false;
+const reduz = matchMedia("(prefers-reduced-motion: reduce)").matches;
+function trocar(c){
+  if(c === cat) return;
+  if(reduz){ cat = c; vitrine(); return; }
+  const g = $("#grade"); g.classList.add("saindo");
+  setTimeout(() => { cat = c; vitrine(); g.classList.remove("saindo"); }, 300);
+}
+$("#grade").addEventListener("pointerenter", () => sobre = true);
+$("#grade").addEventListener("pointerleave", () => sobre = false);
+document.addEventListener("pointerdown", () => ultimoToque = Date.now());
+document.addEventListener("keydown", () => ultimoToque = Date.now());
+setInterval(() => {
+  const cs = [...new Set(visiveis().map(p => p.cat))].sort((a,b) => peso(a) - peso(b) || a.localeCompare(b));
+  if(cs.length < 2 || sobre || document.hidden || Date.now() - ultimoToque < 15000 || $("#gaveta").classList.contains("aberta")) return;
+  trocar(cs[(cs.indexOf(cat) + 1) % cs.length]);
+}, 6000);
+
+/* ---- destaques (faixa de fotos do topo) ---- */
+function slider(){
+  const ds = LOJA.destaques || [], el = $("#slider");
+  if(!ds.length){ el.hidden = true; return; }
+  el.innerHTML = ds.map((d,i) => `<a class="slide${i ? "" : " ativo"}" href="#cardapio" data-ir="${esc(d.cat || "")}">
+    <div class="slide-foto">${d.img ? `<img src="${esc(d.img)}" alt="${esc(d.titulo)}">` : esc(d.emoji || "🍽️")}</div>
+    <div class="slide-txt"><strong>${esc(d.titulo)}</strong><span>${esc(d.frase)}</span></div></a>`).join("");
+  let i = 0;
+  if(ds.length > 1) setInterval(() => {
+    if(document.hidden) return;
+    el.children[i].classList.remove("ativo"); i = (i + 1) % ds.length; el.children[i].classList.add("ativo");
+  }, 5000);
+}
+const menor = (p) => Math.min(...p.precos.map(o => o.v));
+const ordenar = (a, b) => { const o = $("#ordem").value;
+  return o === "menor" ? menor(a) - menor(b) : o === "maior" ? menor(b) - menor(a) : a.nome.localeCompare(b.nome); };
 
 /* ---- carrinho ---- */
 function adicionar(id){
@@ -51,7 +89,7 @@ function mudarQtd(chave, d){
   c.qtd += d; carrinho = carrinho.filter(x => x.qtd > 0); atualizar();
 }
 const subtotal = () => carrinho.reduce((s,c) => s + c.valor * c.qtd, 0);
-const taxa = () => ($("#f-tipo").value === "entrega" && carrinho.length) ? LOJA.taxaEntrega : 0;
+const taxa = () => ($("#f-tipo").value === "entrega" && carrinho.length && !(LOJA.entregaGratisAcima && subtotal() >= LOJA.entregaGratisAcima)) ? LOJA.taxaEntrega : 0;
 
 function atualizar(){
   gravar();
@@ -76,6 +114,7 @@ function enviar(){
   const nome = $("#f-nome").value.trim(), entrega = $("#f-tipo").value === "entrega", end = $("#f-endereco").value.trim();
   if(!nome) return void ($("#erro").textContent = "Informe seu nome.");
   if(entrega && !end) return void ($("#erro").textContent = "Informe o endereço de entrega.");
+  if(LOJA.pedidoMinimo && subtotal() < LOJA.pedidoMinimo) return void ($("#erro").textContent = `Pedido mínimo de ${brl(LOJA.pedidoMinimo)}.`);
   $("#erro").textContent = "";
   const obs = $("#f-obs").value.trim();
   const msg = [`*Novo pedido — ${LOJA.nome}*`, "",
@@ -90,7 +129,9 @@ function enviar(){
 /* ---- início ---- */
 document.addEventListener("click", (e) => {
   const d = e.target.dataset;
-  if(d.cat){ cat = d.cat; vitrine(); }
+  if(d.cat){ ultimoToque = Date.now(); trocar(d.cat); }
+  const ir = e.target.closest("[data-ir]");
+  if(ir && ir.dataset.ir){ ultimoToque = Date.now(); trocar(ir.dataset.ir); }
   if(d.add) adicionar(d.add);
   if(d.mais) mudarQtd(d.mais, 1);
   if(d.menos) mudarQtd(d.menos, -1);
@@ -101,12 +142,22 @@ $("#abrir").onclick = () => gaveta(true);
 $("#fechar").onclick = () => gaveta(false);
 $("#f-tipo").onchange = atualizar;
 $("#enviar").onclick = enviar;
+$("#ordem").onchange = vitrine;
 
 document.title = `${LOJA.nome} — Cardápio`;
 $("#nome-loja").textContent = LOJA.nome;
 $("#slogan").textContent = LOJA.slogan;
-$("#infos").innerHTML = `<span>${esc(LOJA.horario)}</span><span>Entrega: ${LOJA.taxaEntrega ? brl(LOJA.taxaEntrega) : "grátis"}</span><span>Pedido pelo WhatsApp</span>`;
-$("#rodape").textContent = `${LOJA.nome}, ${LOJA.endereco}`;
+const fone = (n) => `(${n.slice(2,4)}) ${n.slice(4,9)}-${n.slice(9)}`;
+$("#infos").innerHTML = `<span>${esc(LOJA.horario)}</span><span>Entrega: ${LOJA.taxaEntrega ? brl(LOJA.taxaEntrega) : "grátis"}</span>`
+  + (LOJA.contatos || []).map(n => `<a href="https://wa.me/${n}" target="_blank" rel="noopener">WhatsApp ${fone(n)}</a>`).join("");
+slider();
+$("#cta-zap").href = `https://wa.me/${LOJA.whatsapp}?text=${encodeURIComponent("Olá! Quero fazer um pedido.")}`;
+$("#selos").innerHTML = ["Sempre quentinha", `Em ${LOJA.tempoEntrega}`, "Pague na entrega"].map(t => `<li>${esc(t)}</li>`).join("");
+$("#texto-entrega").textContent = `Atendemos ${LOJA.regiao}. Pedido mínimo de ${brl(LOJA.pedidoMinimo)}, com entrega grátis a partir de ${brl(LOJA.entregaGratisAcima)}. Se preferir, retire na loja.`;
+$("#rodape").classList.add("rodape");
+$("#rodape").innerHTML = `<div><h3>${esc(LOJA.nome)}</h3><p>${esc(LOJA.slogan)}</p></div>
+  <div><h3>Loja</h3><p>${esc(LOJA.endereco)}</p>${(LOJA.contatos || []).map(n => `<p><a href="https://wa.me/${n}" target="_blank" rel="noopener">${fone(n)}</a></p>`).join("")}</div>
+  <div><h3>Horários</h3><dl>${(LOJA.horarios || []).map(([d,h]) => `<div><dt>${esc(d)}</dt><dd>${esc(h)}</dd></div>`).join("")}</dl></div>`;
 atualizar();
 if(DB.configurado) DB.ouvirProdutos(l => { produtos = l; vitrine(); });
 else { produtos = DEMO; vitrine(); }

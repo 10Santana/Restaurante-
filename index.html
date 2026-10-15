@@ -1,87 +1,55 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dom 10 Marmitaria - Cardápio Online</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="estilo.css">
-  <style>
-    /* Estilos personalizados inspirados no layout do Pinterest */
-    .destaque-pinterest {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 20px auto;
-      padding: 10px;
-      background: #fafafa;
-      border-radius: 16px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-      max-width: 400px;
-    }
-    .topo-info {
-      text-align: center;
-      padding: 20px 10px;
-      background: #ffffff;
-      border-bottom: 1px solid #eaeaea;
-    }
-    .topo-info h1 {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      color: #1b5e20;
-      font-size: 2rem;
-      margin-bottom: 8px;
-    }
-    .topo-info p {
-      color: #555;
-      font-size: 1rem;
-      font-weight: 600;
-    }
-    .topo-info a {
-      color: #2e7d32;
-      text-decoration: none;
-    }
-    .topo-info a:hover {
-      text-decoration: underline;
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cardápio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
 </head>
-<body class="cliente">
-  
-  <!-- Cabeçalho Estilizado -->
-  <header class="topo-info">
-    <h1>🍱 Dom 10 Marmitaria</h1>
-    <p>📱 Faça seu pedido via WhatsApp:<br>
-      <a href="https://wa.me/5511969429812" target="_blank">(11) 96942-9812</a> | 
-      <a href="https://wa.me/5511994196063" target="_blank">(11) 99419-6063</a>
-    </p>
+<body>
+<header class="hero"><div class="wrap hero-2">
+  <div>
+    <p class="eyebrow">Marmitas caseiras</p>
+    <h1 id="nome-loja"></h1><p id="slogan"></p>
+    <div class="cta"><a class="btn" href="#cardapio">Ver cardápio</a><a class="btn-sec" id="cta-zap" target="_blank" rel="noopener">Pedir no WhatsApp</a></div>
+    <div class="infos" id="infos"></div>
+  </div>
+  <div class="slider" id="slider" aria-label="Destaques"></div>
+</div></header>
+<nav aria-label="Categorias"><div class="wrap" id="categorias"></div></nav>
+<main class="wrap" id="cardapio">
+  <div class="barra-cat"><span id="contagem"></span>
+    <label>Ordenar <select id="ordem"><option value="az">Nome, de A a Z</option><option value="menor">Menor preço</option><option value="maior">Maior preço</option></select></label></div>
+  <div class="grade" id="grade"></div>
+</main>
+<section class="wrap secao"><h2>Como pedir</h2><ol class="passos">
+  <li><b>1</b><h3>Escolha</h3><p>Monte o carrinho pelas categorias do cardápio.</p></li>
+  <li><b>2</b><h3>Informe a entrega</h3><p>Endereço e forma de pagamento. A taxa aparece na hora.</p></li>
+  <li><b>3</b><h3>Envie pelo WhatsApp</h3><p>A mensagem com o pedido completo abre pronta. É só enviar.</p></li></ol></section>
+<section class="wrap secao"><h2>Entrega</h2><ul class="selos" id="selos"></ul><p id="texto-entrega"></p></section>
+<footer><div class="wrap" id="rodape"></div></footer>
 
-    <!-- Incorporação no estilo Pinterest que você enviou -->
-    <div class="destaque-pinterest">
-      <iframe src="https://assets.pinterest.com/ext/embed.html?id=3448137209030297" height="359" width="345" frameborder="0" scrolling="no" style="border-radius: 12px;"></iframe>
-    </div>
-  </header>
-
-  <!-- Conteúdo Principal / Cardápio -->
-  <main class="wrap" style="margin-top: 30px;">
-    <section class="cardapio">
-      <h2 style="margin-bottom: 20px; font-family: 'Bricolage Grotesque', sans-serif;">Nosso Cardápio</h2>
-      <div id="categorias-container"></div>
-      <div id="produtos-container" class="produtos-grid"></div>
-    </section>
-
-    <!-- Carrinho / Resumo do Pedido -->
-    <aside class="carrinho-painel" id="carrinho" hidden>
-      <h3>Seu Pedido</h3>
-      <div id="itens-carrinho"></div>
-      <div class="resumo-carrinho">
-        <p>Total: <strong id="total-carrinho">R$ 0,00</strong></p>
-        <button class="btn" id="btn-finalizar">Finalizar Pedido no WhatsApp</button>
-      </div>
-    </aside>
-  </main>
-
-  <script type="module" src="app.js"></script>
+<div id="barra"><button id="abrir" disabled><span id="qtd-total"></span><span id="valor-total"></span></button></div>
+<div id="gaveta" aria-hidden="true">
+  <aside id="painel-pedido" role="dialog" aria-label="Seu pedido">
+    <button class="fechar" id="fechar" aria-label="Fechar">×</button>
+    <h2>Seu pedido</h2>
+    <div id="itens"></div>
+    <div class="total"><span>Total</span><span id="total"></span></div>
+    <label>Seu nome <input id="f-nome" autocomplete="name"></label>
+    <label>Como vai receber?
+      <select id="f-tipo"><option value="entrega">Entrega</option><option value="retirada">Retirar na loja</option></select></label>
+    <label id="l-endereco">Endereço de entrega <input id="f-endereco" autocomplete="street-address"></label>
+    <label>Pagamento
+      <select id="f-pagto"><option>Pix</option><option>Cartão na entrega</option><option>Dinheiro</option></select></label>
+    <label>Observações <textarea id="f-obs" rows="2" placeholder="Ex.: sem cebola"></textarea></label>
+    <p class="erro" id="erro" role="alert"></p>
+    <button class="enviar" id="enviar">Enviar pedido pelo WhatsApp</button>
+  </aside>
+</div>
+<script type="module" src="app.js"></script>
 </body>
 </html>
