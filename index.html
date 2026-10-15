@@ -8,28 +8,65 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="estilo.css">
+  <style>
+    /* Estilos personalizados inspirados no layout do Pinterest */
+    .destaque-pinterest {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px auto;
+      padding: 10px;
+      background: #fafafa;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      max-width: 400px;
+    }
+    .topo-info {
+      text-align: center;
+      padding: 20px 10px;
+      background: #ffffff;
+      border-bottom: 1px solid #eaeaea;
+    }
+    .topo-info h1 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      color: #1b5e20;
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+    .topo-info p {
+      color: #555;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .topo-info a {
+      color: #2e7d32;
+      text-decoration: none;
+    }
+    .topo-info a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body class="cliente">
   
-  <!-- Cabeçalho com Fachada e Marca -->
-  <header class="topo">
-    <div class="wrap" style="text-align: center; padding: 15px 0;">
-      <h1 style="margin-bottom: 10px; font-size: 1.8rem; color: #2e7d32;">🍱 Dom 10 Marmitaria</h1>
-      <div style="margin: 0 auto; max-width: 600px;">
-        <img src="fachada.jpg" alt="Fachada Dom 10 Marmitaria" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
-      </div>
-      <p style="margin-top: 12px; font-weight: 600; color: #333;">
-        📱 Faça seu pedido via WhatsApp:<br>
-        <a href="https://wa.me/5511969429812" target="_blank" style="color: #2e7d32; text-decoration: none;">(11) 96942-9812</a> | 
-        <a href="https://wa.me/5511994196063" target="_blank" style="color: #2e7d32; text-decoration: none;">(11) 99419-6063</a>
-      </p>
+  <!-- Cabeçalho Estilizado -->
+  <header class="topo-info">
+    <h1>🍱 Dom 10 Marmitaria</h1>
+    <p>📱 Faça seu pedido via WhatsApp:<br>
+      <a href="https://wa.me/5511969429812" target="_blank">(11) 96942-9812</a> | 
+      <a href="https://wa.me/5511994196063" target="_blank">(11) 99419-6063</a>
+    </p>
+
+    <!-- Incorporação no estilo Pinterest que você enviou -->
+    <div class="destaque-pinterest">
+      <iframe src="https://assets.pinterest.com/ext/embed.html?id=3448137209030297" height="359" width="345" frameborder="0" scrolling="no" style="border-radius: 12px;"></iframe>
     </div>
   </header>
 
   <!-- Conteúdo Principal / Cardápio -->
-  <main class="wrap" style="margin-top: 20px;">
+  <main class="wrap" style="margin-top: 30px;">
     <section class="cardapio">
-      <h2 style="margin-bottom: 15px;">Nosso Cardápio</h2>
+      <h2 style="margin-bottom: 20px; font-family: 'Bricolage Grotesque', sans-serif;">Nosso Cardápio</h2>
       <div id="categorias-container"></div>
       <div id="produtos-container" class="produtos-grid"></div>
     </section>
